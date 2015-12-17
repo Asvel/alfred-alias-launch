@@ -1,0 +1,14 @@
+
+dl:
+  path: ~/Downloads
+
+tm:
+  app: Terminal
+  tell: do script ""
+  tell-for-new-window: true
+
+cri:
+  name: Google Chrome (Incognito)
+  app: Google Chrome
+  tell: make new window with properties {mode:"incognito"}
+  tell-for-new-window: true

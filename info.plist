@@ -83,16 +83,14 @@
 				<key>queuemode</key>
 				<integer>1</integer>
 				<key>script</key>
-				<string>q="{query}"
-pipe="$TMPDIR/alfred-alias-launch/pipe"
+				<string>import input_filter
 
-echo -n $q &gt; $pipe
-cat &lt; $pipe
+input_filter.query(u"{query}")
 </string>
 				<key>title</key>
 				<string>Alias Launch</string>
 				<key>type</key>
-				<integer>0</integer>
+				<integer>3</integer>
 				<key>withspace</key>
 				<false/>
 			</dict>

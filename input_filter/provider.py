@@ -9,15 +9,10 @@ from codecs import open
 from xml.etree import ElementTree as ET
 
 import yaml
-from daemon import DaemonContext
-from lockfile.pidlockfile import PIDLockFile
 from watchdog.observers import Observer
 from watchdog.events import PatternMatchingEventHandler
 
-tempdir = os.path.join(os.environ['TMPDIR'], "alfred-alias-launch")
-if not os.path.exists(tempdir):
-    os.mkdir(tempdir)
-
+import input_filter
 
 osa_tell = '''
 tell application "{app}"
@@ -93,7 +88,7 @@ def prepare_config(config_path):
 
 
 def main():
-    pipe_path = os.path.join(tempdir, "pipe")
+    pipe_path = input_filter.pipe_path
     if os.path.exists(pipe_path):
         os.remove(pipe_path)
     os.mkfifo(pipe_path)
@@ -119,16 +114,3 @@ def main():
         pipe = os.open(pipe_path, os.O_WRONLY)
         os.write(pipe, repsonse)
         os.close(pipe)
-
-
-def daemon():
-    with DaemonContext(
-        working_directory=os.getcwd(),
-        pidfile=PIDLockFile(os.path.join(tempdir, "pid"))
-    ):
-        main()
-
-
-if __name__ == '__main__':
-    main()
-    # daemon()

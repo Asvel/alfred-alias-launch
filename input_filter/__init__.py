@@ -39,7 +39,7 @@ def query(keyword):
             provider.main()
 
     pipe = os.open(pipe_path, os.O_WRONLY)
-    os.write(pipe, keyword)
+    os.write(pipe, keyword.encode('utf-8'))
     os.close(pipe)
     pipe = os.open(pipe_path, os.O_RDONLY)
     repsonse = os.read(pipe, 1000).decode('utf-8')

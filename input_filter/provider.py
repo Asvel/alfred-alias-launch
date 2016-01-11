@@ -109,8 +109,8 @@ def main():
         os.close(pipe)
 
         xmlitem = config.get(keyword, "")
-        repsonse = '<?xml version="1.0"?><items>{}</items>'.format(xmlitem).encode()
+        repsonse = '<?xml version="1.0"?><items>{}</items>'.format(xmlitem)
 
         pipe = os.open(pipe_path, os.O_WRONLY)
-        os.write(pipe, repsonse)
+        os.write(pipe, repsonse.encode('utf-8'))
         os.close(pipe)
